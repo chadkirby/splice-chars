@@ -1,6 +1,6 @@
 {
   "name": "splice-chars",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "helper function to splice chars in a jquery/cheerio element",
   "main": "src/index.js",
   "scripts": {
