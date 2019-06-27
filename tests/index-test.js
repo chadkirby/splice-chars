@@ -2,7 +2,7 @@ let cheerio = require('cheerio');
 let jsdom = require('jsdom').jsdom;
 let jquery = require('jquery');
 
-let test = require('./get-test')();
+let test = require('./get-test')(module);
 let spliceChars = require('../src/index');
 
 test('spliceChars exports something', function(assert) {

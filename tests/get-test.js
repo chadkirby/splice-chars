@@ -1,16 +1,25 @@
-let path = require('path');
+const _test = require('tape-promise/tape');
 
-let realTest = require('tape-catch');
+module.exports = function(parent, { disableYesno } = {}) {
 
-module.exports = getTest;
-
-function getTest() {
-  let testFile = path.basename(module.parent.filename, '.js');
-  function test(description, ...args) {
-    // add the name of the test-file to the description
-    return realTest(`${testFile}: ${description}`, ...args);
+  function test(desc, testFn) {
+    _test(prependTestFile(desc), doTest(desc, testFn));
   }
-  // don't let require cache this file (otherwise testFile will never change)
-  delete require.cache[path.resolve(__filename)];
+
+  test.onFinish = _test.onFinish;
+  test.skip = _test.skip;
+  //eslint-disable-next-line no-only-tests/no-only-tests
+  test.only = (desc, testFn) => _test.only(prependTestFile(desc), doTest(desc, testFn));
+
   return test;
-}
+
+  function doTest(desc, fn) {
+    return async (assert) => {
+      await fn(assert);
+    };
+  }
+
+  function prependTestFile(desc) {
+    return `${parent.filename.replace(/.+?tests[/]/, ``)}\n${desc}`;
+  }
+};
