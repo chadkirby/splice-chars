@@ -19,7 +19,7 @@
     "eslint": "^6.0.0",
     "eslint-plugin-turbopatent": "^4.0.0",
     "jquery": "^3.1.1",
-    "jsdom": "^9.8.3",
+    "jsdom": "^16.5.0",
     "tap-difflet": "^0.7.1",
     "tape": "^4.10.2",
     "tape-promise": "^4.0.0",
